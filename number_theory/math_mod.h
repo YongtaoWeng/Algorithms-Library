@@ -3,7 +3,6 @@
 #define MATH_MOD_H
 
 #include <stdexcept>
-#include <cmath>
 #include <type_traits> // 用于 std::is_integral
 
 /**
@@ -18,15 +17,17 @@
  * @note Uses static_assert to ensure Int is an integral type.
  */
 template<typename Int>
-Int math_mod (const Int a, const Int b) {
+Int math_mod (const Int a, Int b) {
     static_assert(std::is_integral_v<Int>,
                   "math_mod: Int must be integer!");
     if (b == 0)
         throw std::invalid_argument
                 ("math_mod: Modulus cannot be zero!");
+    if (b < 0)
+        b = -b;
     const Int remainder = a % b;
     // 确保余数非负，调整为 [0, |b|) 范围
-    return remainder >= 0 ? remainder : remainder + std::abs(b);
+    return remainder >= 0 ? remainder : remainder + b;
 }
 
 #endif // MATH_MOD_H

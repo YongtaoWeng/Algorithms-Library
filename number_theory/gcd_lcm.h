@@ -4,7 +4,7 @@
 
 #include <stdexcept>
 #include <type_traits> // 用于 std::is_integral
-#include <cstdlib> // 用于 std::abs, std::div
+#include <cstdlib> // 用于 std::div
 
 /**
  * @brief Computes the Greatest Common Divisor (GCD) of two integers using the Euclidean algorithm.
@@ -25,8 +25,10 @@ Int gcd (Int a, Int b) {
     if (a == 0 && b == 0)
         throw std::invalid_argument
                 ("gcd: a and b should not be both zeros!");
-    a = std::abs(a);
-    b = std::abs(b);
+    if (a < 0)
+        a = -a;
+    if (b < 0)
+        b = -b;
     while (b != 0) {
         const Int remainder = a % b;
         a = b;
@@ -81,6 +83,28 @@ Int gcd_extended (Int a, Int b, Int &s, Int &t) {
     s = s0;
     t = t0;
     return a;
+}
+
+/**
+ * @brief Calculates the least common multiple (LCM) of two integers.
+ *
+ * This function computes the LCM of two positive integers using the formula LCM(a, b) = (a * b) / GCD(a, b),
+ * where GCD is the greatest common divisor. The function ensures that the inputs are positive and of integral type.
+ *
+ * @tparam Int The integral type of the input parameters.
+ * @param a The first positive integer.
+ * @param b The second positive integer.
+ * @return Int The least common multiple of a and b.
+ * @throws std::invalid_argument If either a or b is less than or equal to zero.
+ */
+template<typename Int>
+Int lcm (const Int a, const Int b) {
+    static_assert(std::is_integral_v<Int>,
+                  "lcm: Int must be integer!");
+    if (a <= 0 || b <= 0)
+        throw std::invalid_argument
+                ("lcm: a and b should be positive!");
+    return a / gcd(a, b) * b;
 }
 
 #endif // GCD_LCM_H
