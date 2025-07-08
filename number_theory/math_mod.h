@@ -1,7 +1,9 @@
 // Created by Yongtao Weng on 2025/7/8.
+#ifndef MATH_MOD_H
+#define MATH_MOD_H
+
 #include <stdexcept>
 #include <cmath>
-#include "number_theory.h"
 #include <type_traits> // 用于 std::is_integral
 
 /**
@@ -26,3 +28,5 @@ Int math_mod (const Int a, const Int b) {
     // 确保余数非负，调整为 [0, |b|) 范围
     return remainder >= 0 ? remainder : remainder + std::abs(b);
 }
+
+#endif // MATH_MOD_H

@@ -1,6 +1,8 @@
 // Created by Yongtao Weng on 2025/7/8.
+#ifndef GCD_LCM_H
+#define GCD_LCM_H
+
 #include <stdexcept>
-#include "number_theory.h"
 #include <type_traits> // 用于 std::is_integral
 #include <cstdlib> // 用于 std::abs, std::div
 
@@ -80,3 +82,5 @@ Int gcd_extended (Int a, Int b, Int &s, Int &t) {
     t = t0;
     return a;
 }
+
+#endif // GCD_LCM_H
