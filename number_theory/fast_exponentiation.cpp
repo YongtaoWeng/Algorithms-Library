@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include <cstdint> // 用于 uint64_t
+#include "number_theory.h"
 
 /**
  * @brief 使用快速幂算法计算 (a^b) % m
@@ -10,6 +11,9 @@
  * @param b 指数（非负）
  * @param m 模数（正数）
  * @return uint64_t 计算结果 (a^b) % m
+ * @throws std::invalid_argument
+ * If m is non-positive.
+ * If a and b are both zeros.
  *
  * @note
  * 核心原理：
@@ -25,7 +29,7 @@
  *   std::cout << fast_modular_pow(2, 10, 1000); // 输出 24
  * @endcode
  */
-uint64_t fast_modular_pow(uint64_t a, uint64_t b, const uint64_t m) {
+uint64_t fast_modular_pow (uint64_t a, uint64_t b, const uint64_t m) {
     // 输入验证
     if (m == 0) {
         throw std::invalid_argument("fast_modular_pow: m should be positive!");
