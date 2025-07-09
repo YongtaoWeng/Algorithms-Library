@@ -8,4 +8,8 @@
 
 uint64_t fast_modular_pow (uint64_t a, uint64_t b, uint64_t m);
 
+int euler_sieve (int n);
+
+int euler_sieve_enhanced (int n);
+
 #endif //NUMBER_THEORY_H

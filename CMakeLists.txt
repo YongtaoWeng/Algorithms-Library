@@ -8,6 +8,7 @@ add_library(number_theory
         number_theory/fast_exponentiation.cpp
         number_theory/gcd_lcm.h
         number_theory/math_mod.h
+        number_theory/euler_sieve.cpp
 )
 add_executable(draft draft.cpp)
 target_link_libraries(draft PRIVATE number_theory)
